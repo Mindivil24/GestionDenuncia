@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evaluation;
+use App\Models\Complaint;
 use Illuminate\Http\Request;
 
 class AuditLogController extends Controller
