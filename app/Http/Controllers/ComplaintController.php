@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Complaint;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ComplaintController extends Controller
 {
     // Listar todas las denuncias
     public function index() {
-        $complaints = Complaint::with('user')->get();
+        $complaints = Complaint::with('user')->paginate(12);
         return view('complaints.index', compact('complaints'));
     }
 

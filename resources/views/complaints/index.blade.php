@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($complaints as $complaint)
+            @foreach ($complaints as $complaint)
                 <tr>
                     <td>{{ $complaint->code }}</td>
                     <td>{{ $complaint->reception_date }}</td>
@@ -30,5 +30,5 @@
         </tbody>
     </table>
 
-    {{ $complaints->links() }}
+    {{ $complaints->links() }}
 @endsection

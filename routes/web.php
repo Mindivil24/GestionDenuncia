@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +24,6 @@ Route::middleware('auth')->group(function () {
 Route::resource('users', UserController::class);
 Route::resource('complaints', ComplaintController::class);
 Route::resource('evaluations', EvaluationController::class);
-Route::resource('auditlog', AuditLogController::class)->only(['index','show']);
+Route::resource('auditlogs', AuditLogController::class)->only(['index','show']);
 
 require __DIR__.'/auth.php';
