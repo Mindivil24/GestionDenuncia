@@ -11,8 +11,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['name' => 'dashboard'], function () {
-    Route::get('/dashboard', function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => ["auth"]], function () {
+    Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
 
@@ -20,7 +20,7 @@ Route::group(['name' => 'dashboard'], function () {
     Route::resource('complaints', ComplaintController::class);
     Route::resource('evaluations', EvaluationController::class);
     Route::resource('auditlogs', AuditLogController::class)->only(['index', 'show']);
-})->middleware(['auth', 'verified']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
