@@ -11,9 +11,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::group(['name' => 'dashboard'], function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::resource('users', UserController::class);
+    Route::resource('complaints', ComplaintController::class);
+    Route::resource('evaluations', EvaluationController::class);
+    Route::resource('auditlogs', AuditLogController::class)->only(['index', 'show']);
+})->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -21,9 +28,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('users', UserController::class);
-Route::resource('complaints', ComplaintController::class);
-Route::resource('evaluations', EvaluationController::class);
-Route::resource('auditlogs', AuditLogController::class)->only(['index','show']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
